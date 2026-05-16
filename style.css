@@ -22,21 +22,22 @@ header {
   align-items: center; 
   border-bottom: 1px solid #ddd; 
   margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Grupowanie elementów */
-.header-left, .header-right {
+.header-left {
   display: flex;
   align-items: center;
 }
 
-/* POPRAWKA: Zmusza lewą stronę do rozpychania się i spycha prawą stronę do krawędzi */
-.header-left {
-  flex-grow: 1;
-}
-
 .header-right {
+  display: flex;
+  align-items: center;
   gap: 20px; 
+  /* ZAWSZE trzyma wyszukiwarkę i ikony po prawej stronie, działając jak magnes */
+  margin-left: auto; 
 }
 
 /* --- MENU HAMBURGER --- */
@@ -108,7 +109,7 @@ header {
   transition: transform 0.3s ease; /* Płynne przesuwanie logo */
 }
 
-/* POPRAWKA: Selektor "~" działa prawidłowo, gdy logo jest wewnątrz <a> w strukturze HTML */
+/* Przesunięcie logo w prawo o szerokość menu (200px), gdy menu jest aktywne */
 .menu-container:hover ~ .logo {
   transform: translateX(200px);
 }
