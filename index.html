@@ -2,9 +2,84 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>TEST STRONY</title>
+  <title>Psychometria</title>
+  <style>
+    /* Prosty styl dla układu strony */
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      color: #333;
+    }
+    header { 
+      background-color: #f4f4f4; 
+      padding: 15px 30px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      border-bottom: 1px solid #ddd; 
+    }
+    .logo img { 
+      height: 60px; /* Wysokość logo */
+    }
+    nav ul { 
+      list-style-type: none; 
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      gap: 20px; 
+    }
+    nav a { 
+      text-decoration: none; 
+      color: #333; 
+      font-weight: bold; 
+    }
+    nav a:hover { 
+      color: #0056b3; 
+    }
+    main { 
+      padding: 30px; 
+      max-width: 800px;
+      margin: 0 auto; /* Wyśrodkowanie treści */
+    }
+    section {
+      margin-bottom: 40px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Witaj!</h1>
+
+  <!-- Nagłówek z logo i nawigacją -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Moje Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#start">Strona główna</a></li>
+        <li><a href="#materialy">Materiały</a></li>
+        <li><a href="#badania">Badania</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Główna treść strony -->
+  <main>
+    <section id="start">
+      <h1>Witaj!</h1>
+      <p>To jest strona główna.</p>
+    </section>
+
+    <section id="materialy">
+      <h2>Materiały</h2>
+      <p>Instrukcje, skrypty z R, inne pliki</p>
+    </section>
+
+    <section id="badania">
+      <h2>Badania</h2>
+      <p>Miejsce na opisy projektów badawczych</p>
+    </section>
+  </main>
+
 </body>
 </html>
