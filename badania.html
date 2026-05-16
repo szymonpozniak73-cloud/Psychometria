@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Psychometria - Strona Główna</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      color: #333;
+    }
+    header { 
+      background-color: #f4f4f4; 
+      padding: 15px 30px; 
+      display: flex; 
+      align-items: center; /* Układa elementy w pionowym środku */
+      border-bottom: 1px solid #ddd; 
+    }
+
+    /* --- MENU HAMBURGER --- */
+    .menu-container {
+      position: relative;
+      margin-right: 30px; /* Odstęp między menu a logo */
+    }
+    
+    .hamburger {
+      font-size: 35px; /* Wielkość ikony trzech kresek */
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      color: #333;
+    }
+
+    .sidebar {
+      display: none; /* Domyślnie ukryte menu */
+      position: absolute;
+      top: 100%; 
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 200px;
+      border: 1px solid #ddd;
+    }
+
+    /* Pokaż pasek boczny po najechaniu myszką na kontener */
+    .menu-container:hover .sidebar {
+      display: block;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      border-bottom: 1px solid #eee;
+    }
+
+    .sidebar a {
+      display: block; /* Sprawia, że cały obszar przycisku jest klikalny */
+      padding: 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .sidebar a:hover {
+      background-color: #f4f4f4;
+      color: #0056b3;
+    }
+
+    /* --- LOGO --- */
+    .logo img { 
+      height: 100px; /* Zwiększony rozmiar logo */
+    }
+    
+    main { 
+      padding: 30px; 
+      max-width: 800px;
+      margin: 0 auto; 
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Kontener z menu rozwijanym -->
+    <div class="menu-container">
+      <button class="hamburger">☰</button>
+      <nav class="sidebar">
+        <ul>
+          <li><a href="index.html">Strona główna</a></li>
+          <li><a href="materialy.html">Materiały</a></li>
+          <li><a href="badania.html">Badania</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Prawy element: Logo -->
+    <div class="logo">
+      <img src="logo.png" alt="Moje Logo">
+    </div>
+  </header>
+
+  <main>
+    <h1>Badania</h1>
+    <p>Tutaj będzie opis</p>
+  </main>
+
+</body>
+</html>
