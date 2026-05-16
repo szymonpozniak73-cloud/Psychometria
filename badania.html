@@ -21,12 +21,23 @@
     </div>
   </main>
 
-  <!-- Skrypt pobierający menu -->
+  <!-- Tu wczyta się stopka z pliku footer.html -->
+  <div id="wspolna-stopka"></div>
+
+  <!-- Skrypt pobierający menu i stopkę -->
   <script>
+    // Ładowanie nagłówka
     fetch('header.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('wspolny-naglowek').innerHTML = data;
+      });
+
+    // Ładowanie stopki
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('wspolna-stopka').innerHTML = data;
       });
   </script>
 
