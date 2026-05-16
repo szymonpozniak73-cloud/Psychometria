@@ -12,14 +12,14 @@
   <main>
     <div id="tresc-artykulu">Ładowanie artykułu...</div>
     
-    <br><20px;><hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;"><br>
+    <hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;">
     <a href="strefawiedzy.html" style="color: #666; text-decoration: none; font-weight: bold;">← Powrót do Strefy Wiedzy</a>
   </main>
 
   <div id="wspolna-stopka"></div>
 
   <script>
-    // 1. Ładowanie menu i stopki
+    // 1. Ładowanie nagłówka i stopki
     fetch('header.html').then(r => r.text()).then(d => document.getElementById('wspolny-naglowek').innerHTML = d);
     fetch('footer.html').then(r => r.text()).then(d => document.getElementById('wspolna-stopka').innerHTML = d);
 
