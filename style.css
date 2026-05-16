@@ -42,8 +42,10 @@ header {
   gap: 15px;
 }
 
+/* Nadanie ikonom neutralnego, ciemnego koloru */
 .social-icons a {
   display: flex;
+  color: #333; 
   transition: opacity 0.2s; 
 }
 
@@ -72,6 +74,11 @@ header {
   cursor: pointer;
   border-radius: 0 4px 4px 0;
   font-size: 14px;
+  /* Nowe właściwości do poprawnego pozycjonowania ikony SVG w przycisku */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333; 
 }
 
 .search-container button:hover {
