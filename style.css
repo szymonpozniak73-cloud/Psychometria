@@ -185,3 +185,5 @@ main {
 .project { background-color: #fafafa; border-left: 4px solid #0056b3; padding: 15px 20px; margin-bottom: 25px; border-radius: 4px; }
 .project h3 { margin-top: 0; color: #0056b3; }
 .status { font-size: 0.9em; color: #666; font-style: italic; }
+
+header { background-color: red !important; }
