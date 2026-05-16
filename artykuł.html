@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Artykuł - Strefa Wiedzy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="wspolny-naglowek"></div>
+
+  <main>
+    <div id="tresc-artykulu">Ładowanie artykułu...</div>
+    
+    <br><20px;><hr style="border: 0; border-top: 1px solid #ddd; margin: 30px 0;"><br>
+    <a href="strefawiedzy.html" style="color: #666; text-decoration: none; font-weight: bold;">← Powrót do Strefy Wiedzy</a>
+  </main>
+
+  <div id="wspolna-stopka"></div>
+
+  <script>
+    // 1. Ładowanie menu i stopki
+    fetch('header.html').then(r => r.text()).then(d => document.getElementById('wspolny-naglowek').innerHTML = d);
+    fetch('footer.html').then(r => r.text()).then(d => document.getElementById('wspolna-stopka').innerHTML = d);
+
+    // 2. Odczytanie z adresu URL jaki artykuł pobrać (np. ?id=co-to-jest-psychometria)
+    const urlParams = new URLSearchParams(window.location.search);
+    const artykulId = urlParams.get('id');
+
+    if (artykulId) {
+      // 3. Pobranie pliku .txt z folderu materialy/
+      fetch(`materialy/${artykulId}.txt`)
+        .then(response => {
+          if (!response.ok) throw new Error('Nie znaleziono pliku');
+          return response.text();
+        })
+        .then(tekst => {
+          // 4. Wstrzyknięcie pobranego tekstu na stronę
+          document.getElementById('tresc-artykulu').innerHTML = tekst;
+        })
+        .catch(error => {
+          document.getElementById('tresc-artykulu').innerHTML = '<h2>Błąd ładowania</h2><p>Przepraszam, nie udało się otworzyć tego materiału.</p>';
+        });
+    } else {
+      document.getElementById('tresc-artykulu').innerHTML = '<p>Nie wybrano żadnego tematu.</p>';
+    }
+  </script>
+
+</body>
+</html>
