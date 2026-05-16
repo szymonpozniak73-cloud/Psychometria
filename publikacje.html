@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Psychometria - Publikacje</title>
+  <!-- Podpięcie wspólnego pliku z wyglądem -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tu wczyta się menu z pliku header.html -->
+  <div id="wspolny-naglowek"></div>
+
+  <!-- Główna treść strony głównej -->
+  <main>
+    <h1>Publikacje</h1>
+    <p>work in progress</p>
+  </main>
+
+  <!-- Tu wczyta się stopka z pliku footer.html -->
+  <div id="wspolna-stopka"></div>
+
+  <!-- Skrypt pobierający menu i stopkę -->
+  <script>
+    // Ładowanie nagłówka
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('wspolny-naglowek').innerHTML = data;
+      });
+
+    // Ładowanie stopki
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('wspolna-stopka').innerHTML = data;
+      });
+  </script>
+
+</body>
+</html>
