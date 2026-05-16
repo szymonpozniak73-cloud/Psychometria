@@ -1,7 +1,7 @@
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; }
-header { background-color: #f4f4f4; padding: 15px 30px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+header { background-color: #f4f4f4; padding: 5px 30px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
 .menu-container { position: relative; margin-right: 30px; }
-.hamburger { font-size: 35px; cursor: pointer; background: none; border: none; padding: 0; color: #333; }
+.hamburger { font-size: 25px; cursor: pointer; background: none; border: none; padding: 0; color: #333; }
 .sidebar { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 200px; border: 1px solid #ddd; }
 .menu-container:hover .sidebar { display: block; }
 .sidebar ul { list-style-type: none; margin: 0; padding: 0; }
