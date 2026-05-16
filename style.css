@@ -30,6 +30,11 @@ header {
   align-items: center;
 }
 
+/* POPRAWKA: Zmusza lewą stronę do rozpychania się i spycha prawą stronę do krawędzi */
+.header-left {
+  flex-grow: 1;
+}
+
 .header-right {
   gap: 20px; 
 }
@@ -103,8 +108,8 @@ header {
   transition: transform 0.3s ease; /* Płynne przesuwanie logo */
 }
 
-/* Przesunięcie logo w prawo o szerokość menu (200px), gdy menu jest aktywne */
-.menu-container:hover + .logo {
+/* POPRAWKA: Selektor "~" działa prawidłowo, gdy logo jest wewnątrz <a> w strukturze HTML */
+.menu-container:hover ~ .logo {
   transform: translateX(200px);
 }
 
