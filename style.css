@@ -1,5 +1,19 @@
-/* Podstawowe ustawienia */
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+/* --- PODSTAWOWE USTAWIENIA STRONY (STICKY FOOTER VIA FLEXBOX) --- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: Arial, sans-serif; 
+  color: #333; 
+  line-height: 1.6; 
+  
+  /* Układ pionowy Flexbox dla całej struktury strony */
+  display: flex;
+  flex-direction: column;
+}
 
 /* --- NAGŁÓWEK (PASEK) --- */
 header { 
@@ -85,8 +99,24 @@ header {
   background-color: #d4d4d4;
 }
 
-/* --- GŁÓWNA TREŚĆ --- */
-main { padding: 30px; max-width: 800px; margin: 0 auto; }
+/* --- GŁÓWNA TREŚĆ STRONY --- */
+main { 
+  padding: 30px; 
+  max-width: 800px; 
+  margin: 0 auto; 
+  width: 100%;
+  box-sizing: border-box;
+  
+  /* Elastyczne rozciąganie głównej sekcji w pionie */
+  flex: 1 0 auto; 
+}
+
+/* Zabezpieczenie kontenera dynamicznie ładowanej stopki */
+#wspolna-stopka {
+  flex-shrink: 0;
+}
+
+/* --- STYLE DODATKOWE (PROJEKTY) --- */
 .project { background-color: #fafafa; border-left: 4px solid #0056b3; padding: 15px 20px; margin-bottom: 25px; border-radius: 4px; }
 .project h3 { margin-top: 0; color: #0056b3; }
 .status { font-size: 0.9em; color: #666; font-style: italic; }
