@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<div id="wspolny-naglowek"></div>
+
 <main>
     <h1>Trening przed kolokwium ustnym</h1>
     <p>Wylosuj jedno zagadnienie ogólne i dwa szczegółowe.</p>
@@ -25,8 +27,24 @@
     </div>
 </main>
 
+<div id="wspolna-stopka"></div>
+
 <script>
-    const pytaniaOgolne = [
+    // --- SKRYPTY ŁADUJĄCE NAGŁÓWEK I STOPKĘ ---
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('wspolny-naglowek').innerHTML = data;
+      });
+
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('wspolna-stopka').innerHTML = data;
+      });
+
+    // --- LOGIKA QUIZU ---
+    const pytanyaOgolne = [
         "Klasyczna Teoria Testów (KTT) a Item Response Theory (IRT) - główne różnice i założenia.",
         "Pojęcie rzetelności pomiaru psychologicznego i główne metody jej szacowania.",
         "Trafność testu psychologicznego - klasyfikacja rodzajów i metody oceny.",
@@ -56,7 +74,7 @@
         btnDrawEl.classList.add('quiz-hidden');
         answerButtonsEl.classList.add('quiz-hidden');
         
-        let targetArray = currentStep === 1 ? pytaniaOgolne : pytaniaSzczegolowe;
+        let targetArray = currentStep === 1 ? pytanyaOgolne : pytaniaSzczegolowe;
         let finalQuestion = targetArray[Math.floor(Math.random() * targetArray.length)];
         
         let shuffleCount = 0;
