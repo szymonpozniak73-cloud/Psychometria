@@ -1,3 +1,3 @@
 <h2>Czym jest psychometria?</h2>
-<p>tutaj treść</p>
-<p>tutaj też treść</p>
+<p>work in progress</p>
+<p>tutaj też work in progress</p>
