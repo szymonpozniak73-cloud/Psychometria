@@ -1,0 +1,120 @@
+Rozumiem. W takiej sytuacji najlepiej stworzyć czysty plik HTML, który po prostu "zassie" Twój główny plik style.css, a całą logikę losowania oprzeć na strukturze, którą łatwo wkomponujesz w istniejący układ strony (np. wrzucisz między swoje znaczniki <main>...</main>).
+
+Oto jak powinieneś to podzielić:
+
+1. Plik HTML (np. bonus.html)
+Zauważ, że w sekcji <head> znajduje się teraz odwołanie do Twojego pliku style.css. Cały blok stylów został usunięty.
+
+HTML
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>BONUS. Losowanie zagadnień</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+    <h1>Trening przed kolokwium ustnym</h1>
+    <p>Wylosuj jedno zagadnienie ogólne i dwa szczegółowe.</p>
+    
+    <div class="quiz-container">
+        <div id="status" class="quiz-status">Krok 1/3: Zagadnienie ogólne</div>
+        <div id="questionBox" class="quiz-question-box">Kliknij przycisk, aby wylosować pierwsze zagadnienie.</div>
+        
+        <div id="controls">
+            <button id="btnDraw" class="quiz-btn quiz-btn-draw" onclick="startDraw()">Losuj zagadnienie</button>
+            <div id="answerButtons" class="quiz-hidden">
+                <button class="quiz-btn quiz-btn-correct" onclick="recordAnswer(true)">Umiem to</button>
+                <button class="quiz-btn quiz-btn-wrong" onclick="recordAnswer(false)">Muszę powtórzyć</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const pytaniaOgolne = [
+        "Klasyczna Teoria Testów (KTT) a Item Response Theory (IRT) - główne różnice i założenia.",
+        "Pojęcie rzetelności pomiaru psychologicznego i główne metody jej szacowania.",
+        "Trafność testu psychologicznego - klasyfikacja rodzajów i metody oceny.",
+        "Proces konstruowania testu psychologicznego - omów kluczowe etapy."
+    ];
+
+    const pytaniaSzczegolowe = [
+        "Wykorzystanie konfirmacyjnej analizy czynnikowej (CFA) w badaniu trafności teoretycznej.",
+        "Współczynnik trafności treściowej CVR - wzór, zastosowanie i interpretacja.",
+        "Znaczenie parametrów trudności i dyskryminacji w dwuparametrowym modelu logistycznym (2PL).",
+        "Współczynnik alfa (α) Krippendorffa - kiedy i w jakim celu go stosujemy?",
+        "Zastosowanie modeli ANOVA do analizy różnic międzygrupowych w wynikach testowych."
+    ];
+
+    let currentStep = 1; 
+    let score = 0;
+    let isDrawing = false;
+
+    const statusEl = document.getElementById('status');
+    const questionBoxEl = document.getElementById('questionBox');
+    const btnDrawEl = document.getElementById('btnDraw');
+    const answerButtonsEl = document.getElementById('answerButtons');
+
+    function startDraw() {
+        if (isDrawing) return;
+        isDrawing = true;
+        btnDrawEl.classList.add('quiz-hidden');
+        answerButtonsEl.classList.add('quiz-hidden');
+        
+        let targetArray = currentStep === 1 ? pytaniaOgolne : pytaniaSzczegolowe;
+        let finalQuestion = targetArray[Math.floor(Math.random() * targetArray.length)];
+        
+        let shuffleCount = 0;
+        let shuffleInterval = setInterval(() => {
+            questionBoxEl.innerText = targetArray[Math.floor(Math.random() * targetArray.length)];
+            shuffleCount++;
+            
+            if (shuffleCount > 15) {
+                clearInterval(shuffleInterval);
+                questionBoxEl.innerText = finalQuestion;
+                answerButtonsEl.classList.remove('quiz-hidden');
+                isDrawing = false;
+            }
+        }, 100); 
+    }
+
+    function recordAnswer(isCorrect) {
+        if (isCorrect) score++;
+        currentStep++;
+        
+        if (currentStep > 3) {
+            showSummary();
+        } else {
+            statusEl.innerText = `Krok ${currentStep}/3: Zagadnienie szczegółowe ${currentStep - 1}`;
+            questionBoxEl.innerText = "Gotowy na kolejne pytanie?";
+            answerButtonsEl.classList.add('quiz-hidden');
+            btnDrawEl.innerText = "Losuj kolejne zagadnienie";
+            btnDrawEl.classList.remove('quiz-hidden');
+        }
+    }
+
+    function showSummary() {
+        statusEl.innerText = "Podsumowanie";
+        questionBoxEl.innerText = `Twój wynik: ${score} z 3 poprawnych odpowiedzi.`;
+        answerButtonsEl.classList.add('quiz-hidden');
+        
+        btnDrawEl.innerText = "Zacznij trening od nowa";
+        btnDrawEl.classList.remove('quiz-hidden');
+        btnDrawEl.onclick = resetQuiz;
+    }
+
+    function resetQuiz() {
+        currentStep = 1;
+        score = 0;
+        statusEl.innerText = "Krok 1/3: Zagadnienie ogólne";
+        questionBoxEl.innerText = "Kliknij przycisk, aby wylosować pierwsze zagadnienie.";
+        btnDrawEl.innerText = "Losuj zagadnienie";
+        btnDrawEl.onclick = startDraw;
+    }
+</script>
+
+</body>
+</html>
