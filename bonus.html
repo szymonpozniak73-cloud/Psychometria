@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Losowanie zagadnień</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
@@ -11,14 +12,14 @@
 
 <main>
     <h1 style="text-align: center;">Trening przed kolokwium ustnym</h1>
-    <p>Zmierz się z zestawem trzech pytań i sprawdź, co jeszcze musisz powtórzyć.</p>
+    <p style="text-align: center;">Zmierz się z zestawem trzech pytań i sprawdź, co jeszcze musisz powtórzyć.</p>
     
     <div class="quiz-container">
         <div id="status" class="quiz-status">Krok 1/3: Zagadnienie ogólne</div>
         <div id="questionBox" class="quiz-question-box">Kliknij przycisk, aby wylosować pierwsze zagadnienie.</div>
         
         <div id="controls">
-            <button id="btnDraw" class="quiz-btn quiz-btn-draw" onclick="startDraw()">Losuj</button>
+            <button id="btnDraw" class="quiz-btn quiz-btn-draw" onclick="startDraw()">Losuj zagadnienie</button>
             <div id="answerButtons" class="quiz-hidden">
                 <button class="quiz-btn quiz-btn-correct" onclick="recordAnswer(true)">Umiem to</button>
                 <button class="quiz-btn quiz-btn-wrong" onclick="recordAnswer(false)">Muszę powtórzyć</button>
@@ -62,7 +63,7 @@
     let currentStep = 1; 
     let score = 0;
     let isDrawing = false;
-    let wylosowaneSzczegolowe = []; // Zmienna zapamiętująca wylosowane pytania szczegółowe
+    let wylosowaneSzczegolowe = []; 
 
     const statusEl = document.getElementById('status');
     const questionBoxEl = document.getElementById('questionBox');
@@ -92,7 +93,6 @@
         
         let shuffleCount = 0;
         let shuffleInterval = setInterval(() => {
-            // Animacja tasowania (może wizualnie wykorzystywać całą pulę)
             questionBoxEl.innerText = targetArray[Math.floor(Math.random() * targetArray.length)];
             shuffleCount++;
             
@@ -122,8 +122,31 @@
 
     function showSummary() {
         statusEl.innerText = "Podsumowanie";
-        questionBoxEl.innerText = `Twój wynik: ${score} z 3 poprawnych odpowiedzi.`;
         answerButtonsEl.classList.add('quiz-hidden');
+        
+        // --- DYNAMICZNE WYNIKI I KOMUNIKATY ---
+        let message = "";
+        let color = "";
+
+        if (score === 3) {
+            message = "Świetna robota! Jesteś gotowy!";
+            color = "#28a745"; // Zielony
+            // Odpalenie konfetti
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+        } else if (score === 2) {
+            message = "Całkiem nieźle, ale warto jeszcze zajrzeć do notatek.";
+            color = "#fd7e14"; // Pomarańczowy
+        } else {
+            message = "Jeszcze trochę pracy przed Tobą.";
+            color = "#dc3545"; // Czerwony
+        }
+
+        // Wstawienie sformatowanego tekstu do okna z wynikiem
+        questionBoxEl.innerHTML = `<span style="color: ${color}; font-size: 1.2em;">Twój wynik: ${score}/3<br><br>${message}</span>`;
         
         btnDrawEl.innerText = "Zacznij trening od nowa";
         btnDrawEl.classList.remove('quiz-hidden');
@@ -133,7 +156,7 @@
     function resetQuiz() {
         currentStep = 1;
         score = 0;
-        wylosowaneSzczegolowe = []; // Reset zapamiętanych pytań
+        wylosowaneSzczegolowe = []; 
         statusEl.innerText = "Krok 1/3: Zagadnienie ogólne";
         questionBoxEl.innerText = "Kliknij przycisk, aby wylosować pierwsze zagadnienie.";
         btnDrawEl.innerText = "Losuj zagadnienie";
